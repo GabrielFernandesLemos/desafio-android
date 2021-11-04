@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class User(
+data class UserResponse(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
