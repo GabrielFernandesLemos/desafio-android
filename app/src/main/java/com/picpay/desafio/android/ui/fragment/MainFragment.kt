@@ -11,19 +11,19 @@ import com.picpay.desafio.android.ui.adapter.UserListAdapter
 import com.picpay.desafio.android.ui.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment() : Fragment(R.layout.activity_main) {
+class MainFragment : Fragment(R.layout.activity_main) {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<MainViewModel>()
-    private lateinit var adapter: UserListAdapter
+    private var adapter = UserListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = ActivityMainBinding.bind(view)
         setupLoading()
-        initObserver()
         initRecyclerView()
+        initObserver()
 //        initListeners()
     }
 
@@ -33,7 +33,7 @@ class MainFragment() : Fragment(R.layout.activity_main) {
 
     private fun initObserver() {
         viewModel.userEvent.observe(viewLifecycleOwner) { userData ->
-            adapter.users = userData
+            adapter.updateList(userData)
             binding.userListProgressBar.isVisible = false
         }
 

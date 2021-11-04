@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
 
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListItemViewHolder>() {
 
-    var users = emptyList<User>()
+    private val list : MutableList<User> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListItemViewHolder {
         val itemBinding  = ListItemUserBinding.inflate(
@@ -24,10 +24,10 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListItemViewHol
     }
 
     override fun onBindViewHolder(holder: UserListItemViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(list[position])
     }
 
-    override fun getItemCount(): Int = users.size
+    override fun getItemCount(): Int = list.size
 
     class UserListItemViewHolder(
         private val binding: ListItemUserBinding
@@ -53,6 +53,12 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListItemViewHol
                     })
             }
         }
+    }
+
+    fun updateList(list : List<User>){
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
     }
 
     private companion object : DiffUtil.ItemCallback<User>() {
