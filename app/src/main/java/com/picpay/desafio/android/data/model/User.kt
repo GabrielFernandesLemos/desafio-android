@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.ui.entity
+package com.picpay.desafio.android.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

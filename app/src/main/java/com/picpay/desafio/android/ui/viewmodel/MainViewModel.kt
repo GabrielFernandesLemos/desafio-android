@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.picpay.desafio.android.data.repository.UserRepository
-import com.picpay.desafio.android.ui.entity.User
+import com.picpay.desafio.android.data.model.User
 import kotlinx.coroutines.launch
 import java.lang.Exception
 

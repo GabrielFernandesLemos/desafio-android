@@ -1,5 +1,6 @@
 package com.picpay.desafio.android.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.databinding.ListItemUserBinding
-import com.picpay.desafio.android.ui.entity.User
+import com.picpay.desafio.android.data.model.User
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -33,10 +34,11 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListItemViewHol
         private val binding: ListItemUserBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(user: User) {
             binding.apply {
                 name.text = user.name
-                username.text = user.username
+                username.text = "@"+user.username
                 progressBar.visibility = View.VISIBLE
 
                 Picasso.get()

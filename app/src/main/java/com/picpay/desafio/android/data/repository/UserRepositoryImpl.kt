@@ -1,7 +1,7 @@
 package com.picpay.desafio.android.data.repository
 
 import com.picpay.desafio.android.data.remote.UserRemoteDataSource
-import com.picpay.desafio.android.ui.entity.User
+import com.picpay.desafio.android.data.model.User
 
 class UserRepositoryImpl(
     private val dataSource: UserRemoteDataSource

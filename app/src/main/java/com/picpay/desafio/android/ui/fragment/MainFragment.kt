@@ -24,7 +24,6 @@ class MainFragment : Fragment(R.layout.activity_main) {
         setupLoading()
         initRecyclerView()
         initObserver()
-//        initListeners()
     }
 
     private fun setupLoading() {
