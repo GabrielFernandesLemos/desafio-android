@@ -25,8 +25,8 @@ class MainViewModel(
         viewModelScope.launch {
             try {
                 _userEvent.value = repository.getUsers()
-            }catch (e: Exception){
-                Log.d("Service Error:", e.toString())
+            }catch (exception: Exception){
+                Log.d("Service Error:", exception.toString())
             }
         }
     }
