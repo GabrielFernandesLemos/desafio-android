@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PicPay</string>
     <string name="title">Contatos</string>
-    <string name="error">Ocorreu um erro. Tente novamente.</string>
+    <string name="loading">Carregando... por favor aguarde</string>
     <string name="day_mode">Day</string>
     <string name="night_mode">Night</string>
 </resources>
