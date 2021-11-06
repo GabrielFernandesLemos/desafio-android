@@ -5,17 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.picpay.desafio.android.data.repository.UserRepository
+import com.picpay.desafio.android.data.api.DataState
 import com.picpay.desafio.android.data.model.User
+import com.picpay.desafio.android.data.usecase.GetUsers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class MainViewModel(
-    private val repository: UserRepository
+    private val getUsers: GetUsers
 ) : ViewModel() {
 
-    private val _userEvent = MutableLiveData<List<User>>()
-    val userEvent: LiveData<List<User>> get() = _userEvent
+    private val _userEvent = MutableLiveData<DataState<List<User>>>()
+    val userEvent: LiveData<DataState<List<User>>> get() = _userEvent
 
     init {
         getUsers()
@@ -24,7 +24,7 @@ class MainViewModel(
     fun getUsers() {
         viewModelScope.launch {
             try {
-                _userEvent.value = repository.getUsers()
+                _userEvent.value = getUsers.invoke()
             }catch (exception: Exception){
                 Log.d("Service Error:", exception.toString())
             }

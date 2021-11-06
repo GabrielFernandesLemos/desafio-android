@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="16dp"
-                android:text="@string/error"
+                android:text="@string/loading"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
         </LinearLayout>

@@ -5,15 +5,16 @@ import com.picpay.desafio.android.data.remote.UserRemoteDataSource
 import com.picpay.desafio.android.data.remote.UserRemoteDataSourceImpl
 import com.picpay.desafio.android.data.repository.UserRepository
 import com.picpay.desafio.android.data.repository.UserRepositoryImpl
+import com.picpay.desafio.android.data.usecase.GetUsers
 import com.picpay.desafio.android.ui.viewmodel.MainViewModel
 import com.picpay.desafio.android.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import okhttp3.logging.HttpLoggingInterceptor
 
 val userModule = module {
 
@@ -38,7 +39,8 @@ val userModule = module {
     }
 
     factory<UserRemoteDataSource> { UserRemoteDataSourceImpl(api = get()) }
-    factory<UserRepository> { UserRepositoryImpl(dataSource = get()) }
+    factory<UserRepository> { UserRepositoryImpl(datasource = get()) }
+    factory { GetUsers(repository = get()) }
 
-    viewModel { MainViewModel(repository = get()) }
+    viewModel { MainViewModel(getUsers = get()) }
 }
