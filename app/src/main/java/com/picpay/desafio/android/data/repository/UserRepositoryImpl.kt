@@ -1,14 +1,22 @@
 package com.picpay.desafio.android.data.repository
 
-import com.picpay.desafio.android.data.model.UserResponse
+import com.picpay.desafio.android.data.local.UserCacheDataSource
 import com.picpay.desafio.android.data.remote.UserRemoteDataSource
-import retrofit2.Response
+import com.picpay.desafio.android.domain.model.User
+import com.picpay.desafio.android.domain.repository.UserRepository
 
 class UserRepositoryImpl(
-    private val datasource : UserRemoteDataSource
+    private val remoteDataSource: UserRemoteDataSource,
+    private val cacheDataSource: UserCacheDataSource
 ) : UserRepository {
 
-    override suspend fun getUsers(): Response<List<UserResponse>?>? {
-        return datasource.get()
+    override suspend fun getUsers(): List<User> {
+        return runCatching {
+            val users = remoteDataSource.getUsers()
+            cacheDataSource.save(users)
+            cacheDataSource.getUser()
+        }.getOrElse {
+            cacheDataSource.getUser()
+        }
     }
 }
