@@ -1,22 +1,26 @@
 package com.picpay.desafio.android.di
 
 import com.picpay.desafio.android.data.api.PicPayService
+import com.picpay.desafio.android.data.local.UserCacheDataSource
+import com.picpay.desafio.android.data.local.UserCacheDataSourceImpl
 import com.picpay.desafio.android.data.remote.UserRemoteDataSource
 import com.picpay.desafio.android.data.remote.UserRemoteDataSourceImpl
-import com.picpay.desafio.android.data.repository.UserRepository
+import com.picpay.desafio.android.domain.repository.UserRepository
 import com.picpay.desafio.android.data.repository.UserRepositoryImpl
-import com.picpay.desafio.android.data.usecase.GetUsers
-import com.picpay.desafio.android.ui.viewmodel.MainViewModel
+import com.picpay.desafio.android.data.local.UserDatabase
+import com.picpay.desafio.android.domain.usecase.GetUsersUseCase
+import com.picpay.desafio.android.presentation.viewmodel.MainViewModel
 import com.picpay.desafio.android.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val userModule = module {
+val appModule = module {
 
     single<PicPayService> {
         val builder = OkHttpClient.Builder()
@@ -38,9 +42,12 @@ val userModule = module {
             .create(PicPayService::class.java)
     }
 
+    single { UserDatabase.createDataBase(androidApplication()) }
+    single {  get<UserDatabase>().userDao() }
+    factory<UserCacheDataSource> { UserCacheDataSourceImpl(userDao = get()) }
     factory<UserRemoteDataSource> { UserRemoteDataSourceImpl(api = get()) }
-    factory<UserRepository> { UserRepositoryImpl(datasource = get()) }
-    factory { GetUsers(repository = get()) }
+    factory<UserRepository> { UserRepositoryImpl(remoteDataSource = get(), cacheDataSource = get()) }
+    factory { GetUsersUseCase(userRepository = get()) }
 
-    viewModel { MainViewModel(getUsers = get()) }
+    viewModel { MainViewModel(getUsersUseCase = get()) }
 }
