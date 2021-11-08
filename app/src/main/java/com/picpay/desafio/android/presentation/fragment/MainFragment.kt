@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.ui.fragment
+package com.picpay.desafio.android.presentation.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.picpay.desafio.android.R
-import com.picpay.desafio.android.data.api.DataState
 import com.picpay.desafio.android.databinding.ActivityMainBinding
-import com.picpay.desafio.android.ui.adapter.UserListAdapter
-import com.picpay.desafio.android.ui.viewmodel.MainViewModel
+import com.picpay.desafio.android.presentation.adapter.UserListAdapter
+import com.picpay.desafio.android.presentation.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.activity_main) {
@@ -28,20 +27,15 @@ class MainFragment : Fragment(R.layout.activity_main) {
     }
 
     private fun setupLoading() {
-            showErrorMessage()
-            binding.userListProgressBar.isVisible = true
+        showErrorMessage()
+        binding.userListProgressBar.isVisible = true
     }
 
     private fun initObserver() {
-        viewModel.userEvent.observe(viewLifecycleOwner) { userData ->
-            when (userData) {
-                is DataState.OnSuccess -> {
-                    showErrorMessage(false)
-                    adapter.updateList(userData.data)
-                    binding.userListProgressBar.isVisible = false
-                }
-                else -> return@observe
-            }
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            showErrorMessage(false)
+            adapter.submitList(state.userList)
+            binding.userListProgressBar.isVisible = false
         }
     }
 
@@ -50,10 +44,10 @@ class MainFragment : Fragment(R.layout.activity_main) {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun showErrorMessage(showError: Boolean = true){
-        if (showError){
+    private fun showErrorMessage(showError: Boolean = true) {
+        if (showError) {
             binding.frameError.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.apply {
                 frameError.visibility = View.GONE
                 userListProgressBar.isVisible = false

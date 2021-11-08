@@ -16,6 +16,9 @@ buildscript {
         okhttp_version = '4.9.1'
         google_version = '2.8.7'
 
+        // koin
+        room_version = "2.3.0"
+
         // Picasso
         picasso_version = '2.71828'
         circleimageview_version = '3.0.0'

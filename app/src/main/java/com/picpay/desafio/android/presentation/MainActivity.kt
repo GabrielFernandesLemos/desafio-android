@@ -1,9 +1,9 @@
-package com.picpay.desafio.android.ui
+package com.picpay.desafio.android.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.picpay.desafio.android.R
-import com.picpay.desafio.android.ui.fragment.MainFragment
+import com.picpay.desafio.android.presentation.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
