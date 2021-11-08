@@ -1,8 +1,7 @@
 package com.picpay.desafio.android.data.remote
 
-import com.picpay.desafio.android.data.model.UserResponse
-import retrofit2.Response
+import com.picpay.desafio.android.domain.model.User
 
-interface UserRemoteDataSource {
-    suspend fun get(): Response<List<UserResponse>?>?
+interface UserRemoteDataSource{
+    suspend fun getUsers(): List<User>
 }
