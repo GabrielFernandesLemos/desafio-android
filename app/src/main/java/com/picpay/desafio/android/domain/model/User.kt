@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.data.model
+package com.picpay.desafio.android.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
