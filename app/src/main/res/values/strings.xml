@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">PicPay</string>
     <string name="title">Contatos</string>
-    <string name="loading">Carregando... por favor aguarde</string>
+    <string name="loading">Carregando lista…</string>
+    <string name="empty_list">A lista está vazia</string>
     <string name="day_mode">Day</string>
     <string name="night_mode">Night</string>
 </resources>

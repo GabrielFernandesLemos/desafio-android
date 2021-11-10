@@ -23,10 +23,10 @@ class MainViewModel(
     fun getUsers() {
         viewModelScope.launch {
             runCatching {
-                _state.value = ViewState(isLoading = true)
+                _state.value = ViewState(isLoading = true, isEmptyState = false)
                 getUsersUseCase()
             }.onSuccess { users ->
-                _state.value = ViewState(userList = users, false, isLoading = false)
+                _state.value = ViewState(userList = users, isEmptyState = false, isLoading = false)
             }.onFailure { throwable ->
                 when (throwable) {
                     is EmptyException -> {

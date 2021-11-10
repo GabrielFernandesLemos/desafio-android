@@ -33,9 +33,36 @@ class MainFragment : Fragment(R.layout.activity_main) {
 
     private fun initObserver() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            showErrorMessage(false)
-            adapter.submitList(state.userList)
-            binding.userListProgressBar.isVisible = false
+            if (state.isLoading) showErrorLoading()
+            if (state.isEmptyState) showErrorEmptyList()
+            if (state.userList.isNotEmpty()) {
+                hideErrorLayout()
+                adapter.submitList(state.userList)
+                binding.userListProgressBar.isVisible = false
+            }
+
+        }
+    }
+
+    private fun hideErrorLayout() {
+        binding.apply {
+            frameError.visibility = View.GONE
+            userListProgressBar.isVisible = false
+        }
+    }
+
+    private fun showErrorLoading() {
+        binding.apply {
+            frameError.visibility = View.VISIBLE
+            textError.text = getString(R.string.loading)
+            userListProgressBar.isVisible = true
+        }
+    }
+
+    private fun showErrorEmptyList() {
+        binding.apply {
+            frameError.visibility = View.VISIBLE
+            textError.text = getString(R.string.empty_list)
         }
     }
 

@@ -4,6 +4,6 @@ import com.picpay.desafio.android.domain.model.User
 
 data class ViewState(
     val userList : List<User> = emptyList(),
-    val isEmptyState : Boolean = true,
-    val isLoading : Boolean = true,
+    val isEmptyState : Boolean,
+    val isLoading : Boolean,
 )
