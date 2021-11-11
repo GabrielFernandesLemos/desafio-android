@@ -34,7 +34,7 @@ Response list
 ]
 ```
 
-## Screens
+## Architecture
 <kbd>
 <img src="images/architecture.png" width="30%"></img>
 <img src="images/uml_data.png" width="30%"></img>
