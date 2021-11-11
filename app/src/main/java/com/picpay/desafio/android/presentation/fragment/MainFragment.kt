@@ -27,7 +27,6 @@ class MainFragment : Fragment(R.layout.activity_main) {
     }
 
     private fun setupLoading() {
-        showErrorMessage()
         binding.userListProgressBar.isVisible = true
     }
 
@@ -69,17 +68,6 @@ class MainFragment : Fragment(R.layout.activity_main) {
     private fun initRecyclerView() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-    }
-
-    private fun showErrorMessage(showError: Boolean = true) {
-        if (showError) {
-            binding.frameError.visibility = View.VISIBLE
-        } else {
-            binding.apply {
-                frameError.visibility = View.GONE
-                userListProgressBar.isVisible = false
-            }
-        }
     }
 
     companion object {
