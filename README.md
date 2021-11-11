@@ -18,3 +18,25 @@ Com o passar do tempo identificamos alguns problemas que impedem esse aplicativo
   - Por outro lado, testes unitários rodam em um ambiente de execução diferenciado e são menos fiéis ao dia-a-dia de nossos usuários, então testes instrumentados também são importantes.
 
 Boa sorte! =)
+
+# Challenge result
+
+Response list
+```sh
+[
+    {
+        "id": "1",
+        "name": "Sandrine Spinka",
+        "img": "https://randomuser.me/api/portraits/men/1.jpg",
+        "username": "Tod86"
+    },
+    ...
+]
+```
+
+## Screens
+<kbd>
+<img src="images/architecture.png" width="30%"></img>
+<img src="images/uml_data.png" width="30%"></img>
+<img src="images/mvvm.png" width="30%"></img>
+</kbd>
