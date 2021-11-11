@@ -37,7 +37,8 @@ class MainFragmentScreenTest {
 
 
     @Test
-    fun shouldPassWhenRecyclerIsVisibleAndShowItems() {
+    fun shouldPassWhenRecyclerIsVisible() {
+        Thread.sleep(5000)
         Espresso.onView(withId(R.id.recyclerView))
             .perform()
             .check(matches(isDisplayed()))
