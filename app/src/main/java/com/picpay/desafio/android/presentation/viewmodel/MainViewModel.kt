@@ -20,7 +20,7 @@ class MainViewModel(
         getUsers()
     }
 
-    fun getUsers() {
+    private fun getUsers() {
         viewModelScope.launch {
             runCatching {
                 _state.value = ViewState(isLoading = true, isEmptyState = false)

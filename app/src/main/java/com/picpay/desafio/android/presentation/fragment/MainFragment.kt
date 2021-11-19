@@ -9,18 +9,17 @@ import com.picpay.desafio.android.R
 import com.picpay.desafio.android.databinding.ActivityMainBinding
 import com.picpay.desafio.android.presentation.adapter.UserListAdapter
 import com.picpay.desafio.android.presentation.viewmodel.MainViewModel
+import com.picpay.desafio.android.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.activity_main) {
 
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
+    private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModel<MainViewModel>()
     private var adapter = UserListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = ActivityMainBinding.bind(view)
         setupLoading()
         initRecyclerView()
         initObserver()
